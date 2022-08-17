@@ -1,4 +1,5 @@
-import { IDataContent } from "./models/IHomeData";
+import { IDataContent } from "../models/IHomeData";
+import { IMediaDetail } from "../models/IMediaDetail";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const API_URL = "https://api.themoviedb.org/3/";
@@ -10,7 +11,11 @@ export class TMDBApi {
     );
   }
 
-  public static async getHomeData() {
+  public static async getMedia(id: number, type: string): Promise<IMediaDetail> {
+    return await this.fetchMovies(`${type}/${id}`);
+  }
+
+  public static async getHomeData(): Promise<IDataContent[]> {
     const apiResults = await Promise.all([
       TMDBApi.fetchMovies("trending/movie/week"),
       TMDBApi.fetchMovies("movie/top_rated"),

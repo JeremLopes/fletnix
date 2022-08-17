@@ -1,4 +1,4 @@
-import { IMedia } from "../../libs/ui/components/media-section/mediaSection";
+import { IMedia } from "./IMedia";
 
 export interface IHomeData {
   moviesContent: IDataContent[];

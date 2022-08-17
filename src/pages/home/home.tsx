@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { IDataContent, IHomeData } from "../../api/models/IHomeData";
+import { IDataContent, IHomeData } from "../../models/IHomeData";
 import { TMDBApi } from "../../api/TMDBApi";
-import MediaSection from "../../libs/ui/components/media-section/mediaSection";
+import MediaSection from "../../libs/ui/components/media-section/media-section";
 import Tabs, { TabProps } from "../../libs/ui/components/tabs/tabs";
 
 function Home() {
@@ -14,6 +14,7 @@ function Home() {
         <MediaSection
           key={index}
           title={dataContent.title}
+          type="movie"
           items={dataContent.results}
           className="mt-5"
         />
@@ -25,6 +26,7 @@ function Home() {
         <MediaSection
           key={index}
           title={dataContent.title}
+          type="tv"
           items={dataContent.results}
           className="mt-5"
         />
