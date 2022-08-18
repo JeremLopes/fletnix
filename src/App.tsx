@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavVertical from "./libs/ui/components/navigation/nav-vertical/nav-vertical";
+import NavVertical from "./libs/ui/common/navigation/nav-vertical/nav-vertical";
 import Home from "./pages/home/home";
 import Media from "./pages/media/media";
 

@@ -8,7 +8,7 @@ interface IMediaSectionProps {
   className?: string;
 }
 
-export function MediaSection(props: IMediaSectionProps) {
+export function MediasCarousel(props: IMediaSectionProps) {
   const { title, type, items, className } = props;
 
   return (
@@ -19,7 +19,7 @@ export function MediaSection(props: IMediaSectionProps) {
           <Link key={item.id} className="h-48 min-w-[128px]" to={`/media/${type}/${item.id}`}>
             <img
               src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-              alt={item.title}
+              alt={item.title ?? item.name}
               className="h-full rounded-md"
             />
           </Link>
@@ -29,4 +29,4 @@ export function MediaSection(props: IMediaSectionProps) {
   );
 }
 
-export default MediaSection;
+export default MediasCarousel;

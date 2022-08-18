@@ -1,28 +1,33 @@
 import { IDataContent } from "../models/IHomeData";
 import { IMediaDetail } from "../models/IMediaDetail";
+import { IProvidersRes } from "../models/IProvidersRes";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const API_URL = "https://api.themoviedb.org/3/";
 
-export class TMDBApi {
-  private static async fetchMovies(endpoint: string) {
+export class TMDBHelper {
+  private static async fetchTMDB(endpoint: string) {
     return await fetch(`${API_URL}${endpoint}?language=fr-FR&api_key=${API_KEY}`).then((response) =>
       response.json()
     );
   }
 
   public static async getMedia(id: number, type: string): Promise<IMediaDetail> {
-    return await this.fetchMovies(`${type}/${id}`);
+    return await this.fetchTMDB(`${type}/${id}`);
+  }
+
+  public static async getMediaProviders(id: number, type: string): Promise<IProvidersRes> {
+    return await this.fetchTMDB(`${type}/${id}/watch/providers`);
   }
 
   public static async getHomeData(): Promise<IDataContent[]> {
     const apiResults = await Promise.all([
-      TMDBApi.fetchMovies("trending/movie/week"),
-      TMDBApi.fetchMovies("movie/top_rated"),
-      TMDBApi.fetchMovies("movie/upcoming"),
-      TMDBApi.fetchMovies("movie/now_playing"),
-      TMDBApi.fetchMovies("trending/tv/week"),
-      TMDBApi.fetchMovies("tv/top_rated"),
+      TMDBHelper.fetchTMDB("trending/movie/week"),
+      TMDBHelper.fetchTMDB("movie/top_rated"),
+      TMDBHelper.fetchTMDB("movie/upcoming"),
+      TMDBHelper.fetchTMDB("movie/now_playing"),
+      TMDBHelper.fetchTMDB("trending/tv/week"),
+      TMDBHelper.fetchTMDB("tv/top_rated"),
     ]);
 
     return [

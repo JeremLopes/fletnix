@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { IDataContent, IHomeData } from "../../models/IHomeData";
-import { TMDBApi } from "../../api/TMDBApi";
-import MediaSection from "../../libs/ui/components/media-section/media-section";
-import Tabs, { TabProps } from "../../libs/ui/components/tabs/tabs";
+import { IDataContent, IHomeData } from "../../libs/models/IHomeData";
+import { TMDBHelper } from "../../libs/helpers/TMDBHelper";
+import Tabs, { TabProps } from "../../libs/ui/common/tabs/tabs";
+import MediasCarousel from "../../libs/ui/components/tmdb/medias-carousel/medias-carousel";
 
 function Home() {
   const [data, setData] = useState<IHomeData>();
@@ -11,7 +11,7 @@ function Home() {
     {
       title: "Films",
       content: data?.moviesContent.map((dataContent: IDataContent, index: number) => (
-        <MediaSection
+        <MediasCarousel
           key={index}
           title={dataContent.title}
           type="movie"
@@ -23,7 +23,7 @@ function Home() {
     {
       title: "Séries",
       content: data?.seriesContent.map((dataContent: IDataContent, index: number) => (
-        <MediaSection
+        <MediasCarousel
           key={index}
           title={dataContent.title}
           type="tv"
@@ -35,7 +35,7 @@ function Home() {
   ];
 
   useEffect(() => {
-    TMDBApi.getHomeData().then((dataContents: IDataContent[]) => {
+    TMDBHelper.getHomeData().then((dataContents: IDataContent[]) => {
       const homeData: IHomeData = {
         moviesContent: dataContents.filter((dataContent) => dataContent.type === "movie"),
         seriesContent: dataContents.filter((dataContent) => dataContent.type === "tv"),
