@@ -1,6 +1,6 @@
-import * as TabsLib from '@radix-ui/react-tabs';
-import { useState } from 'react';
-import Button, { ButtonColor, ButtonSize } from '../button/button';
+import * as TabsLib from "@radix-ui/react-tabs";
+import { useState } from "react";
+import Button, { ButtonColor, ButtonSize } from "../button/button";
 
 export interface TabsProps {
   content: TabProps[];
@@ -26,19 +26,10 @@ export function Tabs(props: TabsProps) {
     <TabsLib.Root defaultValue="tab-0">
       <TabsLib.List className="flex gap-2 mb-3">
         {content.map(({ title, disabled }, index) => (
-          <TabsLib.Trigger
-            value={'tab-' + index}
-            key={title + index}
-            disabled={disabled}
-            asChild
-          >
-            <div className="outline-none">
+          <TabsLib.Trigger value={"tab-" + index} key={title + index} disabled={disabled} asChild>
+            <div className="outline-none" style={{ WebkitAppearance: "none" }}>
               <Button
-                color={
-                  activeTabIndex === index
-                    ? ButtonColor.Primary
-                    : ButtonColor.Dark
-                }
+                color={activeTabIndex === index ? ButtonColor.Primary : ButtonColor.Dark}
                 size={ButtonSize.Small}
                 disabled={disabled}
                 onClick={() => handleChange(index)}
@@ -51,7 +42,7 @@ export function Tabs(props: TabsProps) {
         ))}
       </TabsLib.List>
       {content.map(({ content }, index) => (
-        <TabsLib.Content key={'tab-' + index} value={'tab-' + index}>
+        <TabsLib.Content key={"tab-" + index} value={"tab-" + index}>
           {content}
         </TabsLib.Content>
       ))}
